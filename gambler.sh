@@ -9,8 +9,8 @@ totaldays=20
 
 #calculate a 50% of a stack for min and max
 percent=$(( $stack *50 / 100))
-min=$(( $percent-$stack ))
-max=$(( $percent+$stack ))
+min=$(( $stack-$percent ))
+max=$(( $stack+$percent ))
 
 #if result is 0 stack is increment with bet
 #if result is 1 stack is decrement with bet
