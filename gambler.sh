@@ -8,6 +8,8 @@ win=0
 totalDays=3
 day=1
 perStake=0
+lossAmount=0
+gainAmount=0
 
 declare -a dayAmount
 
@@ -57,6 +59,12 @@ function totalStake(){
       min=$(( $stake-$percent ))
       max=$(( $stake+$percent ))
       perStake=$(perDayStake $min $max)
+      if [[ $perstake -eq $min ]]
+      then
+          lossAmount=$(( $lossAmount + $perStake ))
+      else
+          gainAmount=$(( $gainAmount + $perStake ))
+      fi
       dayAmount[ (day) ]=$(( $perStake ))
       day=$(( $day + 1 ))
    done
@@ -77,3 +85,12 @@ then
 echo "$i=>${dayAmount[$i]}"
 fi
 done
+
+#to check a continue a game for next month or stop a game
+if [[ $gainAmount -gt $lossAmount ]]
+then
+  echo "continue for next month"
+  totalstake
+else
+   echo "stop a game"
+fi
